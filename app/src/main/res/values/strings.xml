@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EspoCallRecorder</string>
+    <string name="accessibility_service_description">Allows call recording</string>
+    <string name="enable_service_dialog_title">Please enable accessibility service in settings</string>
+    <string name="enable_service_dialog_desc">You must enable this app\'s accessibility service in order for it to record calls. After clicking OK the acessibility settings will pop up.</string>
+    <!-- Strings used for fragments for navigation -->
+
+</resources>
