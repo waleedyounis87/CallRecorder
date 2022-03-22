@@ -116,7 +116,7 @@ public class RecordingAccessibilityService extends AccessibilityService {
 
             recorder = new MediaRecorder();
             recorder.setAudioSource(Build.VERSION.SDK_INT >= 29 ? MediaRecorder.AudioSource.VOICE_RECOGNITION : MediaRecorder.AudioSource.VOICE_COMMUNICATION);
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
             recorder.setAudioEncodingBitRate(16 * 44100);
             recorder.setAudioSamplingRate(44100);

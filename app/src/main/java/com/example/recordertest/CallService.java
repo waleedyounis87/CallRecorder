@@ -92,19 +92,31 @@ public class CallService extends Service {
                     Log.d("VS","Waiting Client");
                     socket = serverSocket.accept();
                     Log.d("VS","Client Accepted");
-                    bytes = new byte[64];
-                    OutputStream out = socket.getOutputStream();
 
+
+                    int bytesLength = 1024;
                     bis = new BufferedInputStream(new FileInputStream(audioFile));
-                    int audioBytes = (int) Math.ceil(audioFile.length()) / bytes.length;
+                    int audioBytes = (int) Math.ceil(audioFile.length()) / bytesLength;
                    // int audiobytesCiel =
-                    while (audioBytes > 0) {
-                        int number = bis.read(bytes, 0, bytes.length);
-                        for (int i = 0; i < number; i++) {
-                            out.write(bytes, 0, bytes.length);
+                    //while (audioBytes > 0) {
+                        //int number = bis.read(bytes, 0, bytes.length);
+                        for (int i = 0; i < audioBytes+1 ; i++) {
+                            bytes = new byte[1024];
+                            bis.read(bytes, 0, bytes.length);
+                            OutputStream out = socket.getOutputStream();
+                            try{
+                                out.write(bytes, 0, bytes.length);
+                            }
+                            catch ( Exception e){
+                                Log.d("VS",String.valueOf(e.getMessage()));
+                            }
+
+                            //out.write(bytes, 0, bytes.length);
+                            Log.d("VS","While ForLoop" + audioFile.length() + "AudioBytes: "+ audioBytes);
+                            out.flush();
                         }
-                        audioBytes -= audioBytes;
-                    }
+                        //audioBytes--;
+                    //}
                     Log.d("VS","After Read bytes");
                     //while(bis.available() > 0){
                     //bytes = new byte[64];
@@ -112,10 +124,10 @@ public class CallService extends Service {
 
 
                     Log.d("VS","Write File to Socket Done!");
-                    out.flush();
-                    out.close();
+
+                    //out.close();
                     socket.close();
-                    serverSocket.close();
+                    //serverSocket.close();
                    // }
 
                 } catch (IOException e) {
